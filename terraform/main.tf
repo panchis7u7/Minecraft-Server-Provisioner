@@ -46,11 +46,11 @@ provider "xenorchestra" {
 #############################################################################
 
 data "xenorchestra_pool" "pool" {
-  name_label = "xeon-server"
+  name_label = "panchis-xcp-ng"
 }
 
 data "xenorchestra_sr" "smb_arch_sr" {
-  name_label = "ISO Files Arch"
+  name_label = "ISOs SMB"
 }
 
 data "xenorchestra_network" "net" {
@@ -65,10 +65,10 @@ data "xenorchestra_template" "ubuntu_template" {
 # Ubuntu Server VM configuration.
 #############################################################################
 
-resource "xenorchestra_vm" "Minecraft Server" {
-  name_label        = "GNS3 VM"
-  name_description  = "GNS3 vm for cisco labs."
-  memory_max        = 57982058496 #60GB
+resource "xenorchestra_vm" "Minecraft_Server" {
+  name_label        = "Minecraft Server Ubuntu"
+  name_description  = "A Minecraft Server."
+  memory_max        = 25769803776 #24GB
   cpus              = 12
   template          = data.xenorchestra_template.ubuntu_template.id
   auto_poweron      = true
@@ -76,7 +76,7 @@ resource "xenorchestra_vm" "Minecraft Server" {
   hvm_boot_firmware = "bios"
 
   cdrom {
-    id = "a52d79ab-304a-42af-97f0-28e5238712d0"
+    id = "020f0aee-8dac-4420-849d-e99e21c5af74"
   }
 
   network {
@@ -84,9 +84,9 @@ resource "xenorchestra_vm" "Minecraft Server" {
   }
 
   disk {
-    sr_id      = "ef1d6d1e-843d-d387-b6f1-d581ea75b8a2"
-    name_label = "GNS3-Disk"
-    size       = 26843545600
+    sr_id      = "466a0af5-822a-080a-ded8-5bbb0fecca81"
+    name_label = "MSUS-Disk"
+    size       = 25769803776 #24GB
   }
 
   tags = [
@@ -101,6 +101,7 @@ resource "xenorchestra_vm" "Minecraft Server" {
   }
 }
 
+# xe sr-list => Display all SR's information.
 # xe cd-list => Displays all ISO's available in XCP-ng.
 # xe vm-disk-list => Displays all storages assigned to the created VM's.
 # xe template-list => Shows all available templates details.
