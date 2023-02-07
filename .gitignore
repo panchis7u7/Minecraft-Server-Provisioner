@@ -2,6 +2,13 @@
 .env
 
 # Terraform.
-terraform.tfstate
+.terraform
 .terraform.lock.hcl
+terraform.tfstate
 terraform.tfstate.backup
+
+# Minecraft.
+server.jar
+
+# Ansible.
+hosts

@@ -1,0 +1,1 @@
+Please rename the "env_template" directory to ".env" and fill the xcp credentials within the "xcp_credentials".

@@ -1,0 +1,45 @@
+---
+# Java Installation.
+########################################################
+
+- name: Minecraft Server Installation.
+  hosts: msus_host
+  remote_user: panchis
+  tasks:
+  - name: Install OpenJDK19.
+    apt:
+      name:
+        - openjdk-19-jdk
+        - openjdk-19-jre
+      state: latest
+    become: yes
+
+# Minecraft Spinup.
+########################################################
+
+  - name: Pass server file to the VM.
+    ansible.builtin.copy:
+      src: server.jar
+      dest: ~/server.jar
+      owner: panchis
+      group: panchis
+      force: no
+
+  - name: Pass server.properties.
+    ansible.builtin.copy:
+      src: server.properties
+      dest: ~/server.properties
+      owner: panchis
+      group: panchis
+      force: no
+
+  - name: Pass server-icon.png
+    ansible.builtin.copy:
+      src: server-icon.png
+      dest: ~/server-icon.png
+      owner: panchis
+      group: panchis
+      force: no
+
+  #- name: Run Server
+  #  ansible.builtin.shell: java -Xms20G -Xmx20G -jar server.jar nogui
